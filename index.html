@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rund ums Haus - Premium Hausdienstleistungen Leipzig</title>
 <meta name="description" content="Premium Hausdienstleistungen in Leipzig. Professionelle Betreuung, Reparaturen, Reinigung und Gartenarbeiten.">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
 <style>
 * {
@@ -15,13 +14,15 @@
 }
 
 :root {
-    --primary: #22c55e;
-    --primary-dark: #16a34a;
+    --primary-red: #DC2626;
+    --primary-red-dark: #991B1B;
+    --accent-red: #EF4444;
     --dark: #0f172a;
     --dark-light: #1a2744;
     --light: #f5f7f6;
     --light-gray: #e8eceb;
     --text: #1f2937;
+    --success-green: #10B981;
     --border-radius: 16px;
 }
 
@@ -39,15 +40,27 @@ body {
 
 /* ============ HEADER ============ */
 header {
-    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+    background: linear-gradient(135deg, var(--dark) 0%, #1f3a5f 100%);
     color: white;
-    padding: 15px 0;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    padding: 20px 0;
+    box-shadow: 0 10px 40px rgba(220, 38, 38, 0.15);
     position: sticky;
     top: 0;
     z-index: 1000;
     backdrop-filter: blur(10px);
     background-color: rgba(15, 23, 42, 0.95);
+    animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 nav {
@@ -62,9 +75,7 @@ nav {
 .logo-section {
     display: flex;
     align-items: center;
-    gap: 20px;
-    font-weight: 700;
-    font-size: 20px;
+    gap: 25px;
     transition: transform 0.3s ease;
 }
 
@@ -72,33 +83,61 @@ nav {
     transform: scale(1.02);
 }
 
-.logo-section img {
-    height: 55px;
+.logo-img {
+    height: 80px;
     width: auto;
-    filter: drop-shadow(0 4px 8px rgba(34, 197, 94, 0.3));
-    transition: filter 0.3s ease;
+    filter: drop-shadow(0 6px 12px rgba(220, 38, 38, 0.4));
+    transition: all 0.4s ease;
+    animation: logoFloat 3s ease-in-out infinite;
 }
 
-.logo-section img:hover {
-    filter: drop-shadow(0 6px 16px rgba(34, 197, 94, 0.5));
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.logo-section:hover .logo-img {
+    filter: drop-shadow(0 10px 20px rgba(220, 38, 38, 0.6));
+    animation: none;
 }
 
 .logo-text h1 {
-    font-size: 20px;
+    font-size: 24px;
     margin: 0;
     letter-spacing: -0.5px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff 0%, #EF4444 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .logo-text p {
-    font-size: 12px;
+    font-size: 13px;
     opacity: 0.85;
-    margin: 2px 0 0 0;
+    margin: 3px 0 0 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
 }
 
 .contact-header {
     font-size: 14px;
     opacity: 0.9;
     font-weight: 500;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* ============ CONTAINER ============ */
@@ -110,16 +149,15 @@ nav {
 
 /* ============ HERO SECTION ============ */
 .hero {
-    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+    background: linear-gradient(135deg, var(--dark) 0%, #1f3a5f 100%);
     color: white;
     padding: 100px 30px;
     text-align: center;
     border-radius: var(--border-radius);
     margin: 50px auto;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    box-shadow: 0 20px 60px rgba(220, 38, 38, 0.2);
     position: relative;
     overflow: hidden;
-    animation: slideIn 0.8s ease-out;
 }
 
 .hero::before {
@@ -129,7 +167,7 @@ nav {
     right: -10%;
     width: 400px;
     height: 400px;
-    background: rgba(34, 197, 94, 0.1);
+    background: rgba(220, 38, 38, 0.15);
     border-radius: 50%;
     filter: blur(80px);
     animation: float 6s ease-in-out infinite;
@@ -142,18 +180,28 @@ nav {
     left: -5%;
     width: 300px;
     height: 300px;
-    background: rgba(34, 197, 94, 0.05);
+    background: rgba(16, 185, 129, 0.08);
     border-radius: 50%;
     filter: blur(80px);
     animation: float 8s ease-in-out infinite reverse;
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(20px); }
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(20px);
+    }
 }
 
-@keyframes slideIn {
+.hero-content {
+    position: relative;
+    z-index: 1;
+    animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
     from {
         opacity: 0;
         transform: translateY(30px);
@@ -164,20 +212,25 @@ nav {
     }
 }
 
-.hero-content {
-    position: relative;
-    z-index: 1;
-}
-
 .hero h1 {
     font-size: 48px;
     margin-bottom: 20px;
     font-weight: 800;
     letter-spacing: -1px;
-    background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.8) 100%);
+    background: linear-gradient(135deg, #fff 0%, #EF4444 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: textGlow 3s ease-in-out infinite;
+}
+
+@keyframes textGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 0px rgba(220, 38, 38, 0));
+    }
+    50% {
+        filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.3));
+    }
 }
 
 .hero p {
@@ -187,36 +240,43 @@ nav {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    animation: fadeIn 1s ease-out 0.3s both;
 }
 
 .cta-button {
     display: inline-block;
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary-red) 0%, var(--accent-red) 100%);
     color: white;
-    padding: 14px 40px;
+    padding: 16px 50px;
     border-radius: 50px;
     text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
+    font-weight: 700;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    box-shadow: 0 10px 30px rgba(220, 38, 38, 0.4);
+    animation: fadeIn 1s ease-out 0.6s both;
+    border: 2px solid transparent;
 }
 
 .cta-button:hover {
-    background: var(--primary-dark);
-    transform: translateY(-3px);
-    box-shadow: 0 15px 45px rgba(34, 197, 94, 0.4);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 20px 50px rgba(220, 38, 38, 0.6);
+    border-color: white;
+}
+
+.cta-button:active {
+    transform: translateY(-2px);
 }
 
 /* ============ SECTIONS ============ */
 section {
-    margin: 70px auto;
-    animation: fadeIn 0.6s ease-out;
+    margin: 80px auto;
+    animation: fadeInUp 0.8s ease-out;
 }
 
-@keyframes fadeIn {
+@keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -229,7 +289,7 @@ section h2 {
     font-size: 36px;
     margin-bottom: 40px;
     padding-bottom: 15px;
-    border-bottom: 3px solid var(--primary);
+    border-bottom: 4px solid var(--primary-red);
     display: inline-block;
     font-weight: 800;
     letter-spacing: -0.5px;
@@ -240,18 +300,46 @@ section h2 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
 .service-card {
     background: white;
     padding: 35px;
     border-radius: var(--border-radius);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
-    border: 2px solid transparent;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+    border: 3px solid transparent;
     position: relative;
     overflow: hidden;
+    animation: cardFadeIn 0.8s ease-out backwards;
+}
+
+.service-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.service-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.service-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.service-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) rotateX(10deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+    }
 }
 
 .service-card::before {
@@ -260,17 +348,17 @@ section h2 {
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-red) 0%, var(--accent-red) 100%);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.4s ease;
+    transition: transform 0.5s ease;
 }
 
 .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 50px rgba(34, 197, 94, 0.15);
-    border-color: var(--primary);
+    transform: translateY(-12px) rotateY(2deg);
+    box-shadow: 0 25px 60px rgba(220, 38, 38, 0.2);
+    border-color: var(--primary-red);
 }
 
 .service-card:hover::before {
@@ -279,16 +367,26 @@ section h2 {
 
 .service-card h3 {
     color: var(--dark);
-    font-size: 20px;
+    font-size: 21px;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     gap: 12px;
-    font-weight: 700;
+    font-weight: 800;
 }
 
 .service-card h3 span {
-    font-size: 28px;
+    font-size: 32px;
+    animation: emojiFloat 3s ease-in-out infinite;
+}
+
+@keyframes emojiFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-8px) rotate(5deg);
+    }
 }
 
 .service-card ul {
@@ -297,38 +395,51 @@ section h2 {
 }
 
 .service-card li {
-    padding: 10px 0;
-    padding-left: 28px;
+    padding: 12px 0;
+    padding-left: 30px;
     position: relative;
     font-size: 15px;
     color: #555;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .service-card li::before {
     content: "✓";
     position: absolute;
     left: 0;
-    color: var(--primary);
+    color: var(--success-green);
     font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .service-card:hover li {
     color: var(--dark);
+    transform: translateX(5px);
 }
 
 /* ============ PRICING SECTION ============ */
 .pricing-highlight {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
     color: white;
-    padding: 50px 40px;
+    padding: 60px 40px;
     border-radius: var(--border-radius);
     text-align: center;
     margin: 30px 0;
-    box-shadow: 0 15px 50px rgba(34, 197, 94, 0.2);
+    box-shadow: 0 20px 60px rgba(220, 38, 38, 0.3);
     position: relative;
     overflow: hidden;
+    animation: priceSlideIn 0.8s ease-out;
+}
+
+@keyframes priceSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .pricing-highlight::before {
@@ -338,9 +449,10 @@ section h2 {
     right: -10%;
     width: 300px;
     height: 300px;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     filter: blur(60px);
+    animation: float 6s ease-in-out infinite;
 }
 
 .pricing-highlight p {
@@ -351,7 +463,7 @@ section h2 {
 }
 
 .pricing-highlight p:first-of-type {
-    font-size: 24px;
+    font-size: 26px;
     margin-bottom: 15px;
 }
 
@@ -363,114 +475,103 @@ section h2 {
     margin: 40px 0;
 }
 
-/* ============ JOKE CONTAINER ============ */
-.joke-container {
+/* ============ CONTACT INFO ============ */
+.contact-info {
     background: white;
     padding: 40px;
     border-radius: var(--border-radius);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    text-align: center;
-    border: 2px solid transparent;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    animation: slideInLeft 0.8s ease-out;
 }
 
-.joke-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
-.joke-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 50px rgba(34, 197, 94, 0.15);
-    border-color: var(--primary);
-}
-
-.joke-container h3 {
+.contact-info h3 {
     color: var(--dark);
-    margin: 0 0 10px 0;
-    font-size: 22px;
-    font-weight: 700;
+    margin-bottom: 25px;
+    font-size: 24px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.joke-container > p {
-    color: #999;
-    font-size: 14px;
-    margin: 0 0 20px 0;
-}
-
-.joke-text {
-    font-size: 18px;
-    font-style: italic;
-    margin: 25px 0;
-    color: var(--dark);
-    min-height: 100px;
+.contact-item {
+    margin: 20px 0;
     display: flex;
     align-items: center;
-    justify-content: center;
-    line-height: 1.8;
-}
-
-.joke-button {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: white;
-    border: none;
-    padding: 13px 30px;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 15px;
+    gap: 15px;
+    font-size: 16px;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
-    width: 100%;
 }
 
-.joke-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(34, 197, 94, 0.4);
+.contact-item:hover {
+    transform: translateX(8px);
 }
 
-.joke-button:active {
-    transform: translateY(0);
+.contact-item span {
+    font-size: 26px;
+    min-width: 35px;
+    animation: emojiPulse 2s ease-in-out infinite;
 }
 
-.loading {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 3px solid rgba(34, 197, 94, 0.3);
-    border-radius: 50%;
-    border-top-color: var(--primary);
-    animation: spin 1s ease-in-out infinite;
+@keyframes emojiPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
 }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
+.contact-item a {
+    color: var(--primary-red);
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: var(--primary-red-dark);
+    text-decoration: underline;
 }
 
 /* ============ CONTACT FORM ============ */
 .contact-form {
-    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+    background: linear-gradient(135deg, var(--dark) 0%, #1f3a5f 100%);
     color: white;
     padding: 40px;
     border-radius: var(--border-radius);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 25px rgba(220, 38, 38, 0.1);
+    animation: slideInRight 0.8s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .contact-form h3 {
     color: white;
     margin-bottom: 25px;
-    font-size: 22px;
-    font-weight: 700;
+    font-size: 24px;
+    font-weight: 800;
 }
 
 .form-group {
@@ -480,135 +581,129 @@ section h2 {
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 14px;
-    color: rgba(255,255,255,0.95);
+    color: rgba(255, 255, 255, 0.95);
 }
 
 input, textarea {
     width: 100%;
     padding: 14px 16px;
-    border: 2px solid rgba(255,255,255,0.15);
+    border: 2px solid rgba(220, 38, 38, 0.3);
     border-radius: 10px;
     font-family: 'Inter', sans-serif;
-    background: rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.08);
     color: white;
     font-size: 14px;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
 }
 
 input::placeholder, textarea::placeholder {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.5);
 }
 
 input:focus, textarea:focus {
     outline: none;
-    border-color: var(--primary);
-    background: rgba(255,255,255,0.12);
-    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+    border-color: var(--primary-red);
+    background: rgba(220, 38, 38, 0.1);
+    box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.15);
+    transform: scale(1.02);
 }
 
 .submit-button {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    background: linear-gradient(135deg, var(--primary-red) 0%, var(--accent-red) 100%);
     color: white;
     border: none;
-    padding: 14px 30px;
+    padding: 16px 30px;
     border-radius: 50px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 15px;
     width: 100%;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    box-shadow: 0 10px 30px rgba(220, 38, 38, 0.4);
 }
 
 .submit-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(34, 197, 94, 0.4);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 45px rgba(220, 38, 38, 0.5);
 }
 
-/* ============ CONTACT INFO ============ */
-.contact-info {
-    background: white;
-    padding: 40px;
-    border-radius: var(--border-radius);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    margin-bottom: 20px;
-}
-
-.contact-info h3 {
-    color: var(--dark);
-    margin-bottom: 25px;
-    font-size: 22px;
-    font-weight: 700;
-}
-
-.contact-item {
-    margin: 18px 0;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 16px;
-    transition: transform 0.3s ease;
-}
-
-.contact-item:hover {
-    transform: translateX(5px);
-}
-
-.contact-item span {
-    font-size: 24px;
-    min-width: 30px;
-}
-
-.contact-item a {
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-.contact-item a:hover {
-    color: var(--primary-dark);
+.submit-button:active {
+    transform: translateY(-1px);
 }
 
 /* ============ FOOTER ============ */
 footer {
-    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+    background: linear-gradient(135deg, var(--dark) 0%, #1f3a5f 100%);
     color: white;
     text-align: center;
-    padding: 50px 30px;
+    padding: 60px 30px;
     margin-top: 100px;
     font-size: 14px;
-    border-top: 2px solid rgba(34, 197, 94, 0.2);
+    border-top: 4px solid var(--primary-red);
+    animation: slideUp 0.8s ease-out;
 }
 
 footer p {
-    margin: 10px 0;
+    margin: 12px 0;
     opacity: 0.85;
+    transition: all 0.3s ease;
 }
 
 footer p:first-child {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 5px;
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #fff 0%, #EF4444 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+footer p:hover {
+    transform: scale(1.05);
 }
 
 /* ============ HINWEIS ============ */
 .note {
-    background: linear-gradient(135deg, #fef3c7 0%, #fcd34d 100%);
-    border-left: 5px solid #f59e0b;
-    padding: 20px;
+    background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+    border-left: 5px solid var(--primary-red);
+    padding: 22px;
     border-radius: var(--border-radius);
     margin: 30px 0;
-    color: #92400e;
-    font-weight: 500;
+    color: #7F1D1D;
+    font-weight: 600;
+    animation: noteSlide 0.8s ease-out;
+}
+
+@keyframes noteSlide {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 768px) {
     .container {
         padding: 0 20px;
+    }
+
+    .logo-section {
+        gap: 15px;
+    }
+
+    .logo-img {
+        height: 60px;
+    }
+
+    .logo-text h1 {
+        font-size: 20px;
     }
 
     .hero {
@@ -641,14 +736,6 @@ footer p:first-child {
         flex-wrap: wrap;
         gap: 15px;
     }
-
-    .logo-section {
-        gap: 12px;
-    }
-
-    .logo-section img {
-        height: 45px;
-    }
 }
 
 @media (max-width: 480px) {
@@ -657,12 +744,20 @@ footer p:first-child {
     }
 
     header {
-        padding: 12px 0;
+        padding: 15px 0;
     }
 
     nav {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .logo-img {
+        height: 50px;
+    }
+
+    .logo-text h1 {
+        font-size: 18px;
     }
 
     .contact-header {
@@ -676,7 +771,6 @@ footer p:first-child {
 
     .hero h1 {
         font-size: 28px;
-        margin-bottom: 15px;
     }
 
     .hero p {
@@ -691,10 +785,14 @@ footer p:first-child {
         padding: 25px;
     }
 
-    .joke-container,
     .contact-form,
     .contact-info {
         padding: 25px;
+    }
+
+    .cta-button {
+        padding: 14px 40px;
+        font-size: 14px;
     }
 }
 </style>
@@ -705,10 +803,10 @@ footer p:first-child {
 <header>
     <nav class="container">
         <div class="logo-section">
-            <img src="logo-ruh.png" alt="Rund ums Haus Logo">
+            <img src="logo-ruh.png" alt="Rund ums Haus Logo" class="logo-img">
             <div class="logo-text">
                 <h1>Rund ums Haus</h1>
-                <p>Mohamad & Iwan</p>
+                <p>Mohamad & Iwan – Leipzig</p>
             </div>
         </div>
         <div class="contact-header">
@@ -723,7 +821,7 @@ footer p:first-child {
         <div class="hero-content">
             <h1>Professionelle Hausdienstleistungen</h1>
             <p>Premium Service rund um Ihr Zuhause – von Betreuung über Reparaturen bis zur Reinigung</p>
-            <a href="#contact" class="cta-button">Jetzt Anfrage stellen</a>
+            <a href="#contact" class="cta-button">Jetzt Anfrage stellen →</a>
         </div>
     </section>
 
@@ -784,63 +882,54 @@ footer p:first-child {
     </section>
 
     <section id="contact">
-        <h2>😂 Witz & 📞 Kontakt</h2>
+        <h2>📞 Kontakt & Anfrage</h2>
         
         <div class="combined-section">
-            <!-- Joke Generator -->
-            <div class="joke-container">
-                <h3>Täglicher Witz</h3>
-                <p>Lachen ist die beste Medizin!</p>
-                <div class="joke-text" id="jokeText">
-                    <div class="loading"></div>
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <h3>Kontaktieren Sie uns</h3>
+                <div class="contact-item">
+                    <span>📞</span>
+                    <a href="tel:+4917783886155">0177 8388615</a>
                 </div>
-                <button class="joke-button" onclick="fetchJoke()">🎲 Neuer Witz</button>
+                <div class="contact-item">
+                    <span>📧</span>
+                    <a href="mailto:r.u.haus37@gmail.com">r.u.haus37@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>Leipzig, Deutschland</span>
+                </div>
+                <hr style="margin: 25px 0; border: none; border-top: 2px solid rgba(220, 38, 38, 0.2);">
+                <p style="font-size: 14px; color: #666; margin-top: 15px;">Schnelle Antworten auf alle Ihre Fragen. Wir freuen uns auf Ihren Kontakt!</p>
             </div>
 
             <!-- Contact Form -->
-            <div>
-                <div class="contact-info">
-                    <h3>Kontaktieren Sie uns</h3>
-                    <div class="contact-item">
-                        <span>📞</span>
-                        <a href="tel:+4917783886155">0177 8388615</a>
-                    </div>
-                    <div class="contact-item">
-                        <span>📧</span>
-                        <a href="mailto:r.u.haus37@gmail.com">r.u.haus37@gmail.com</a>
-                    </div>
-                    <div class="contact-item">
-                        <span>📍</span>
-                        <span>Leipzig</span>
-                    </div>
+            <form class="contact-form" action="mailto:r.u.haus37@gmail.com" method="post" enctype="text/plain">
+                <h3>Schnelle Anfrage</h3>
+                
+                <div class="form-group">
+                    <label for="name">Ihr Name *</label>
+                    <input type="text" id="name" name="Name" placeholder="Wie heißen Sie?" required>
                 </div>
 
-                <form class="contact-form" action="mailto:r.u.haus37@gmail.com" method="post" enctype="text/plain">
-                    <h3>Schnelle Anfrage</h3>
-                    
-                    <div class="form-group">
-                        <label for="name">Ihr Name *</label>
-                        <input type="text" id="name" name="Name" placeholder="Wie heißen Sie?" required>
-                    </div>
+                <div class="form-group">
+                    <label for="email">E-Mail *</label>
+                    <input type="email" id="email" name="Email" placeholder="Ihre E-Mail" required>
+                </div>
 
-                    <div class="form-group">
-                        <label for="email">E-Mail *</label>
-                        <input type="email" id="email" name="Email" placeholder="Ihre E-Mail" required>
-                    </div>
+                <div class="form-group">
+                    <label for="phone">Telefonnummer</label>
+                    <input type="tel" id="phone" name="Telefon" placeholder="Ihre Telefonnummer">
+                </div>
 
-                    <div class="form-group">
-                        <label for="phone">Telefonnummer</label>
-                        <input type="tel" id="phone" name="Telefon" placeholder="Ihre Telefonnummer">
-                    </div>
+                <div class="form-group">
+                    <label for="message">Nachricht *</label>
+                    <textarea id="message" name="Nachricht" rows="4" placeholder="Beschreiben Sie Ihre Anfrage..." required></textarea>
+                </div>
 
-                    <div class="form-group">
-                        <label for="message">Nachricht *</label>
-                        <textarea id="message" name="Nachricht" rows="4" placeholder="Beschreiben Sie Ihre Anfrage..." required></textarea>
-                    </div>
-
-                    <button type="submit" class="submit-button">📨 Anfrage absenden</button>
-                </form>
-            </div>
+                <button type="submit" class="submit-button">📨 Anfrage absenden</button>
+            </form>
         </div>
     </section>
 
@@ -851,24 +940,6 @@ footer p:first-child {
     <p>Mohamad & Iwan – Leipzig</p>
     <p style="margin-top: 20px; font-size: 12px; opacity: 0.6;">© 2026 Rund ums Haus. Alle Rechte vorbehalten.</p>
 </footer>
-
-<script>
-async function fetchJoke() {
-    const jokeText = document.getElementById('jokeText');
-    jokeText.innerHTML = '<div class="loading"></div>';
-    
-    try {
-        const response = await fetch('https://api.jokes.one/jokes/random');
-        const data = await response.json();
-        jokeText.textContent = data.joke.text;
-    } catch (error) {
-        jokeText.textContent = '😅 Oops! Witz konnte nicht geladen werden. Versuchen Sie es später erneut!';
-    }
-}
-
-// Witz beim Laden der Seite anzeigen
-window.addEventListener('load', fetchJoke);
-</script>
 
 </body>
 </html>
